@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GALAXY CLICKER FIX</title>
+</head>
+<body style="background:#000; color:#0ff; font-family:monospace; text-align:center;">
+
+    <div id="login_div" style="margin-top:100px; border:2px solid #0ff; display:inline-block; padding:20px;">
+        <h1>GALAXY CLICKER</h1>
+        <p>ENTER NAME:</p>
+        <input type="text" id="name_in">
+        <button onclick="startGame()" style="cursor:pointer;">START</button>
+    </div>
+
+    <div id="game_div" style="display:none; margin-top:50px;">
+        <h2 id="pName">Pilot: </h2>
+        <h1 style="color:yellow;">STARDUST: <span id="money">0</span></h1>
+        
+        <div onclick="doClick()" style="font-size:100px; cursor:pointer; user-select:none;">🪐</div>
+        <p>( CLICK PLANET )</p>
+
+        <div style="border:1px solid #0ff; padding:10px; margin:10px;">
+            <button onclick="buyUp()">Upgrade Laser (Cost: <span id="c1">20</span>)</button>
+            <button onclick="buyAuto()">Auto-Miner (Cost: <span id="c2">100</span>)</button>
+            <p>Power: +<span id="pwr">1</span> | Auto: +<span id="aut">0</span></p>
+        </div>
+
+        <div style="margin-top:50px; border-top:1px solid red;">
+            <p style="color:red;">ADMIN SYSTEM</p>
+            <input type="password" id="pass" placeholder="Password">
+            <button onclick="unlock()">UNLOCK</button>
+            
+            <div id="admin_ui" style="display:none; margin-top:10px;">
+                <input type="text" id="cmd" placeholder="/give name amount">
+                <button onclick="runCmd()">EXE</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var pilot = "";
+        var dust = 0;
+        var pwr = 1;
+        var auto = 0;
+        var cost1 = 20;
+        var cost2 = 100;
+
+        function startGame() {
+            pilot = document.getElementById("name_in").value;
+            if(pilot == "") { alert("Type a name!"); return; }
+            
+            document.getElementById("login_div").style.display = "none";
+            document.getElementById("game_div").style.display = "block";
+            document.getElementById("pName").innerText = "Pilot: " + pilot;
+        }
+
+        function doClick() {
+            dust = dust + pwr;
+            update();
+        }
+
+        function buyUp() {
+            if(dust >= cost1) {
+                dust
